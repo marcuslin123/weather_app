@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import config
 
@@ -7,7 +7,9 @@ app = Flask(__name__)
 
 def get_weather(city):
     try:
-        response = requests.get(config.URL)
+        city = city.strip().title()
+
+        response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={config.API_KEY}&units=imperial", config.DEFAULT_URL)
         response.raise_for_status()
         data = response.json()
         return {
@@ -27,7 +29,11 @@ def get_weather(city):
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    city = config.DEFAULT_CITY
+    if request.method == "POST":
+        city = request.form.get("city", "Berkeley").strip().title()
+    else:
+        city = "Berkeley"
+
     weather_data = get_weather(city)
 
     return render_template("index.html", weather=weather_data)
