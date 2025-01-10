@@ -92,7 +92,7 @@ nav {
 }
 
 .current_conditions_image {
-    width: 200px;
+    width: auto;
     margin-left: auto;
-    height: auto;
+    height: 150px;
 }

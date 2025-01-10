@@ -14,8 +14,10 @@ def get_weather(city):
         data = response.json()
         return {
             "city": data["name"],
-            "temperature": data["main"]["temp"],
-            "description": data["weather"][0]["description"]
+            "temperature": round(data["main"]["temp"]),
+            "temp_min": round(data["main"]["temp_min"]),
+            "temp_max": round(data["main"]["temp_max"]),
+            "description": data["weather"][0]["description"].title()
         }
     except Exception as e:
         print(f"Error fetching weather: {e}")

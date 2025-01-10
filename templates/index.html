@@ -30,7 +30,7 @@
                     <h1>{{ weather.city }} <span>As of 2:25 pm PST</span></h1>           
                     <h1 class="temperature">{{ weather.temperature }}°</h1>
                     <p class="conditions">{{ weather.description }}</p>
-                    <p class="high-low">Day 55° • Night 44°</p>
+                    <p class="high-low">Day {{ weather.temp_max }}° • Night {{ weather.temp_min }}°</p>
                 {% else %}
                     <p>Could not fetch weather data.</p>
                 {% endif %}
